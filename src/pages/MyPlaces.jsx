@@ -1,3 +1,4 @@
+import { fetchWithTimeout } from '../utils/api';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -31,9 +32,9 @@ const MyPlaces = () => {
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
-        const response = await fetch('http://localhost:3002/api/places/my-places', {
+        const response = await fetchWithTimeout('http://localhost:3002/api/places/my-places', {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${localStorage.getItem('token')})`
           }
         });
         
@@ -65,10 +66,10 @@ const MyPlaces = () => {
 
   const handleDeletePlace = async (placeId) => {
     try {
-      const response = await fetch(`http://localhost:3002/api/places/${placeId}`, {
+      const response = await fetchWithTimeout('http://localhost:3002/api/places/${placeId}', {
         method: 'DELETE',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('token')})`
         }
       });
       if (response.ok) {

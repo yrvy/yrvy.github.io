@@ -1,3 +1,4 @@
+import { fetchWithTimeout } from '../utils/api';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -133,10 +134,10 @@ const NewPlace = () => {
     try {
       console.log('Creating place with:', { name, description, isPrivate, password, selectedTheme }); // Debug log
 
-      const response = await fetch('http://localhost:3002/api/places', {
+      const response = await fetchWithTimeout('http://localhost:3002/api/places', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Authorization': `Bearer ${localStorage.getItem('token')})`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({

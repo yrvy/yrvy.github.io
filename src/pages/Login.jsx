@@ -1,3 +1,4 @@
+import { fetchWithTimeout } from '../utils/api';
 import { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import {
@@ -35,11 +36,11 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:3002/api/auth/login', {
+      const response = await fetchWithTimeout('http://localhost:3002/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-        },
+        }),
         body: JSON.stringify(formData)
       });
 

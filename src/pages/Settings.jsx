@@ -1,3 +1,4 @@
+import { fetchWithTimeout } from '../utils/api';
 import { useState, useRef } from 'react';
 import {
   Container,
@@ -60,11 +61,11 @@ const Settings = () => {
     setSuccess('');
 
     try {
-      const response = await fetch('http://localhost:3002/api/auth/settings', {
+      const response = await fetchWithTimeout('http://localhost:3002/api/auth/settings', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('token')})`
         },
         body: JSON.stringify(formData)
       });

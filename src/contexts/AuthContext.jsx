@@ -1,3 +1,4 @@
+import { fetchWithTimeout } from '../utils/api';
 import { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext(null);
@@ -14,9 +15,9 @@ export const AuthProvider = ({ children }) => {
       if (token && storedUser) {
         try {
           // Verify token is valid
-          const response = await fetch('http://localhost:3002/api/auth/verify', {
+          const response = await fetchWithTimeout('http://localhost:3002/api/auth/verify', {
             headers: {
-              'Authorization': `Bearer ${token}`
+              'Authorization': `Bearer ${token})`
             }
           });
           

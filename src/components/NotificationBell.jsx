@@ -1,3 +1,4 @@
+import { fetchWithTimeout } from '../utils/api';
 import { useState, useEffect } from 'react';
 import {
   IconButton,
@@ -40,9 +41,9 @@ const NotificationBell = () => {
 
   const fetchFriendRequests = async () => {
     try {
-      const response = await fetch('http://localhost:3002/api/auth/friends/requests', {
+      const response = await fetchWithTimeout('http://localhost:3002/api/auth/friends/requests', {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('token')})`
         }
       });
       if (response.ok) {
@@ -60,10 +61,10 @@ const NotificationBell = () => {
 
   const handleAcceptRequest = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:3002/api/auth/friends/accept/${userId}`, {
+      const response = await fetchWithTimeout('http://localhost:3002/api/auth/friends/accept/${userId}', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('token')})`
         }
       });
       
@@ -77,10 +78,10 @@ const NotificationBell = () => {
 
   const handleRejectRequest = async (userId) => {
     try {
-      await fetch(`http://localhost:3002/api/auth/friends/reject/${userId}`, {
+      await fetchWithTimeout('http://localhost:3002/api/auth/friends/reject/${userId}', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('token')})`
         }
       });
       

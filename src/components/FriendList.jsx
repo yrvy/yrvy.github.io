@@ -1,3 +1,4 @@
+import { fetchWithTimeout } from '../utils/api';
 import { useState, useEffect } from 'react';
 import {
   Box,
@@ -61,9 +62,9 @@ const FriendList = () => {
 
   const fetchFriends = async () => {
     try {
-      const response = await fetch('http://localhost:3002/api/auth/friends', {
+      const response = await fetchWithTimeout('http://localhost:3002/api/auth/friends', {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('token')})`
         }
       });
       if (response.ok) {
@@ -77,9 +78,9 @@ const FriendList = () => {
 
   const fetchFriendRequests = async () => {
     try {
-      const response = await fetch('http://localhost:3002/api/auth/friends/requests', {
+      const response = await fetchWithTimeout('http://localhost:3002/api/auth/friends/requests', {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('token')})`
         }
       });
       if (response.ok) {
@@ -122,10 +123,10 @@ const FriendList = () => {
 
   const handleAcceptRequest = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:3002/api/auth/friends/accept/${userId}`, {
+      const response = await fetchWithTimeout('http://localhost:3002/api/auth/friends/accept/${userId}', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('token')})`
         }
       });
       
@@ -145,10 +146,10 @@ const FriendList = () => {
 
   const handleRejectRequest = async (userId) => {
     try {
-      await fetch(`http://localhost:3002/api/auth/friends/reject/${userId}`, {
+      await fetchWithTimeout('http://localhost:3002/api/auth/friends/reject/${userId}', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('token')})`
         }
       });
       
@@ -165,10 +166,10 @@ const FriendList = () => {
 
   const handleRemoveFriend = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:3002/api/auth/friends/remove/${userId}`, {
+      const response = await fetchWithTimeout('http://localhost:3002/api/auth/friends/remove/${userId}', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('token')})`
         }
       });
       

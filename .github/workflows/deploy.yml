@@ -26,15 +26,18 @@ jobs:
         run: npm install
 
       - name: Start Server in Background
-        run: npm run start:server &
-        # The & runs the command in the background
+        run: |
+          npm run start:server &
+          sleep 10  # Increased wait time
 
-      - name: Wait for Server to Start
-        run: sleep 5  # Wait 5 seconds to ensure server is up
+      - name: Check Server Logs
+        run: |
+          ps aux | grep node
+          netstat -tuln  # Check listening ports
 
       - name: Verify Server is Running
         run: |
-          curl http://localhost:3002/api/rooms
+          curl -v http://localhost:3002/api/rooms
           if [ $? -ne 0 ]; then
             echo "Server failed to start"
             exit 1

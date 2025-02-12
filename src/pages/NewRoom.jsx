@@ -1,3 +1,4 @@
+import { fetchWithTimeout } from '../utils/api';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -35,11 +36,11 @@ const NewRoom = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:3002/api/rooms', {
+      const response = await fetchWithTimeout('http://localhost:3002/api/rooms', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('token')})`
         },
         body: JSON.stringify(formData)
       });

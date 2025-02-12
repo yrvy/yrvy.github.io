@@ -16,6 +16,7 @@ import {
 import { PlayArrow as PlayArrowIcon, Person as PersonIcon, Headphones as HeadphonesIcon, MusicNote as MusicNoteIcon } from '@mui/icons-material';
 import { useAuth } from '../contexts/AuthContext';
 import { keyframes } from '@mui/system';
+import { fetchWithTimeout } from '../utils/api';
 
 // Animations
 const fadeInUp = keyframes`
@@ -91,11 +92,8 @@ const Home = () => {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const response = await fetch('http://localhost:3002/api/rooms');
-        if (response.ok) {
-          const data = await response.json();
-          setRooms(data);
-        }
+        const data = await fetchWithTimeout('/api/rooms');
+        setRooms(data);
       } catch (error) {
         console.error('Error fetching rooms:', error);
       } finally {
@@ -123,7 +121,7 @@ const Home = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3002/api/rooms', {
+      const room = await fetchWithTimeout('/api/rooms', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -135,8 +133,7 @@ const Home = () => {
         })
       });
 
-      if (response.ok) {
-        const room = await response.json();
+      if (room) {
         navigate(`/room/${room._id}`);
       } else {
         console.error('Failed to create room');

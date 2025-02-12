@@ -1,3 +1,4 @@
+import { fetchWithTimeout } from '../utils/api';
 import { useState, useEffect, useRef } from 'react';
 import {
   Box,
@@ -347,9 +348,9 @@ const FloatingChat = () => {
 
   const fetchFriends = async () => {
     try {
-      const response = await fetch('http://localhost:3002/api/auth/friends', {
+      const response = await fetchWithTimeout('http://localhost:3002/api/auth/friends', {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('token')})`
         }
       });
       if (response.ok) {

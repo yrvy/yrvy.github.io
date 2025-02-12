@@ -1,3 +1,4 @@
+import { fetchWithTimeout } from '../utils/api';
 import { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import {
@@ -114,10 +115,10 @@ const Layout = ({ children }) => {
       return;
     }
     try {
-      const response = await fetch('http://localhost:3002/api/rooms', {
+      const response = await fetchWithTimeout('http://localhost:3002/api/rooms', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Authorization': `Bearer ${localStorage.getItem('token')})`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
