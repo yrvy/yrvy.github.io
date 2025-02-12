@@ -23,33 +23,13 @@ jobs:
           node-version: '18'
 
       - name: Install Dependencies
-        run: |
-          npm install
-          echo "Installed dependencies:"
-          npm list --depth=0
+        run: npm install
 
-      - name: Grant execute permissions to vite binary
-        run: |
-          chmod +x ./node_modules/.bin/vite
-          ls -l ./node_modules/.bin/vite
+      - name: Start Server in Background
+        run: npm run start:server & 
 
       - name: Build
-        run: |
-          echo "Current directory:"
-          pwd
-          echo "Directory contents:"
-          ls -la
-          npm run build
-          echo "Build exit code: $?"
-
-      - name: Debug Build Output
-        run: |
-          echo "Dist directory contents:"
-          ls -lR dist
-          echo "Disk usage:"
-          du -sh dist
-          echo "Total files in dist:"
-          find dist -type f | wc -l
+        run: npm run build
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
