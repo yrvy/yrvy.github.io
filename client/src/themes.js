@@ -1,0 +1,42 @@
+export const themes = {
+  green: {
+    name: 'Green',
+    primary: '#1db954',
+    secondary: '#1ed760',
+    background: '#121212',
+    surface: '#282828',
+    text: '#ffffff',
+    subtext: '#b3b3b3',
+    hover: '#404040',
+  },
+  dark: {
+    name: 'Dark',
+    primary: '#bb86fc',
+    secondary: '#03dac6',
+    background: '#121212',
+    surface: '#1e1e1e',
+    text: '#ffffff',
+    subtext: '#b3b3b3',
+    hover: '#2c2c2c',
+  },
+  light: {
+    name: 'Light',
+    primary: '#1976d2',
+    secondary: '#2196f3',
+    background: '#ffffff',
+    surface: '#f5f5f5',
+    text: '#000000',
+    subtext: '#666666',
+    hover: '#e0e0e0',
+  },
+  pink: {
+    name: 'Pink',
+    primary: '#ff69b4',
+    secondary: '#ff8da1',
+    background: '#1a1a1a',
+    surface: '#2d2d2d',
+    text: '#ffffff',
+    subtext: '#b3b3b3',
+    hover: '#404040',
+  }
+}; 
