@@ -23,6 +23,11 @@ jobs:
           echo "Installed dependencies:"
           npm list --depth=0
 
+      - name: Grant execute permissions to vite binary
+        run: |
+          chmod +x ./node_modules/.bin/vite
+          ls -l ./node_modules/.bin/vite
+
       - name: Build
         run: |
           echo "Current directory:"
