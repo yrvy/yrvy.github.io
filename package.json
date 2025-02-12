@@ -1,15 +1,12 @@
 {
-  "name": "herefm-client",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "herefm-clone",
+  "homepage": "https://yrvy.github.io",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    "homepage": "https://yrvy.github.io"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",

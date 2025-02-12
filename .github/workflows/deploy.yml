@@ -28,28 +28,22 @@ jobs:
           echo "Installed dependencies:"
           npm list --depth=0
 
-      - name: Grant execute permissions to vite binary
+      - name: Prepare Build
         run: |
-          chmod +x ./node_modules/.bin/vite
-          ls -l ./node_modules/.bin/vite
+          echo "VITE_BASE_URL=https://yrvy.github.io" >> $GITHUB_ENV
+          echo "Homepage set to: $VITE_BASE_URL"
 
       - name: Build
         run: |
-          echo "Current directory:"
-          pwd
-          echo "Directory contents:"
-          ls -la
           npm run build
-          echo "Build exit code: $?"
+          echo "Build completed"
 
-      - name: Debug Build Output
+      - name: Verify Build Output
         run: |
           echo "Dist directory contents:"
           ls -lR dist
-          echo "Disk usage:"
-          du -sh dist
-          echo "Total files in dist:"
-          find dist -type f | wc -l
+          echo "Checking index.html:"
+          cat dist/index.html
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
@@ -57,3 +51,4 @@ jobs:
           folder: dist
           branch: gh-pages
           token: ${{ secrets.GITHUB_TOKEN }}
+          single-commit: true
