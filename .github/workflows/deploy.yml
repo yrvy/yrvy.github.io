@@ -18,16 +18,34 @@ jobs:
           node-version: '18'
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install
+          echo "Installed dependencies:"
+          npm list --depth=0
 
       - name: Build
-        run: npm run build
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "Directory contents:"
+          ls -la
+          npm run build
+          echo "Build exit code: $?"
 
       - name: Debug Build Output
         run: |
-          ls -R dist
-          echo "Build completed. Checking contents:"
+          echo "Dist directory contents:"
+          ls -lR dist
+          echo "Disk usage:"
           du -sh dist
+          echo "Total files in dist:"
+          find dist -type f | wc -l
+
+      - name: Check for Build Errors
+        if: failure()
+        run: |
+          echo "Build failed. Checking npm logs:"
+          cat ~/.npm/_logs/*
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
